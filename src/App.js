@@ -1,26 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Provider } from 'react-redux';
+import store from './redux/store/store';
+import Lists from "./components/lists/Lists";
+import styled from "styled-components";
+
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Container>
+        <Lists />
+      </Container>
+
+    </Provider>
+
   );
 }
 
 export default App;
+
+const Container = styled('div')`
+  width: 40%;
+  margin: 50px auto;
+ `
