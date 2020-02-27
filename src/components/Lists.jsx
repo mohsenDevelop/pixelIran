@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import PropTypes from 'prop-types';
-import { addingTask } from "../../redux/actions/addTask";
 import AllList from "./AllList";
+import TodoList from "./TodoList";
+import MarkList from "./MarkList";
+import { addingTask } from "../redux/actions/addTask";
 
 const Lists = props => {
 
     const [value, setValue] = useState("");
     const dispatch = useDispatch();
-    // const { patientInformation } = useSelector((state) => state.PatientProfileInformation);
 
     const handleChange = (event) => {
         setValue(event.target.value);
@@ -21,7 +22,7 @@ const Lists = props => {
             dispatch(addingTask(value));
         }
     }
-    console.log("value", value);
+
     return (
         <>
             <Form onSubmit={handleSubmit}>
@@ -30,6 +31,8 @@ const Lists = props => {
             </Form>
 
             <AllList />
+            <TodoList />
+            <MarkList />
 
 
         </>

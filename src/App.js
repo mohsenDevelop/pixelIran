@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { Provider } from 'react-redux';
 import store from './redux/store/store';
-import Lists from "./components/lists/Lists";
+import Lists from "./components/Lists";
 import styled from "styled-components";
 
 

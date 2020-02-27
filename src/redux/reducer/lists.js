@@ -16,7 +16,9 @@ export default function (state = initialState, action) {
         case ADD_TASK:
             return {
                 ...state,
-                tasks: [...state.tasks, payload]
+                tasks: [...state.tasks, payload],
+                todo: [...state.todo, payload],
+
             };
 
         case DELETE_LIST:
@@ -24,6 +26,7 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 tasks: state.tasks.filter(i => i.id !== payload),
+                todo: state.todo.filter(i => i.id !== payload),
             }
         default:
             return state;

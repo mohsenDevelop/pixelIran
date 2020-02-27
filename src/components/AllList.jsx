@@ -1,33 +1,37 @@
 import React from 'react';
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { deletingList } from "../../redux/actions/deleteList";
+import { deletingList } from "../redux/actions/deleteList";
+
+
+
+export const RenderButtons = ({ id }) => {
+    const dispatch = useDispatch();
+
+
+    const handleDelete = () => {
+        dispatch(deletingList(id))
+    }
+    return (
+        <div style={{ display: "flex" }}>
+            <ButtonCancel onClick={handleDelete}>Delete</ButtonCancel>
+            <ButtonEdit>Edit</ButtonEdit>
+            <ButtonMark>Mark</ButtonMark>
+        </div>
+    );
+}
 
 
 
 const AllList = () => {
-    const { tasks } = useSelector((state) => state.lists);
-    const dispatch = useDispatch();
-
-    const RenderButtons = ({ id }) => {
-        console.log("id", id);
-
-        const handleDelete = () => {
-            dispatch(deletingList(id))
-        }
-        return (
-            <div style={{ display: "flex" }}>
-                <ButtonCancel onClick={handleDelete}>Delete</ButtonCancel>
-                <ButtonEdit>Edit</ButtonEdit>
-                <ButtonMark>Mark</ButtonMark>
-            </div>
-        );
-    }
 
     const RenderAddList = () => {
 
-        if (!!tasks && tasks.length) {
-            return (
+        const { tasks } = useSelector((state) => state.lists);
+
+        return (
+
+            !!tasks && tasks.length ? (
                 <List>
                     {
                         tasks.map(i =>
@@ -39,15 +43,24 @@ const AllList = () => {
                     }
                 </List>
             )
-        }
+                :
+                (
+                    <NotFound>
+                        There Is No Task
+                    </NotFound>
+                )
+
+
+
+        )
     }
 
     return (
         <>
             <Title>All List : </Title>
-            {
-                RenderAddList()
-            }
+
+            <RenderAddList />
+
 
         </>
     )
@@ -55,19 +68,19 @@ const AllList = () => {
 
 export default AllList;
 
-const Title = styled('p')`
+export const Title = styled('p')`
     font-size: 20px;
     font-weight: bold;
     margin-top: 50px;
 `;
 
-const List = styled('ul')`
+export const List = styled('ul')`
    list-style : none;
    margin: 0px;
    padding: 0px;
 `;
 
-const ListItem = styled('li')`
+export const ListItem = styled('li')`
    height: 50px;
    border: 1px solid #DFDFDF;
    background-color: #DFDFDF;
@@ -154,6 +167,20 @@ margin-right: 10px;
     border: 1px solid #000000;
     color: #000000;
 }
+`;
+
+
+export const NotFound = styled('div')`
+    height: 30px;
+    background-color: #E6F3FF;
+    border-radius: 10px;
+    color: #0069D1;
+    display: flex;
+    padding: 5px 10px;
+    align-items: center;
+    font-size: 15px;
+    width: 50%;
+    margin: 0 auto;
 `;
 
 
