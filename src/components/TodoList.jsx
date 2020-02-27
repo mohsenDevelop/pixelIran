@@ -13,10 +13,10 @@ const TodoList = () => {
             !!todo && todo.length ? (
                 <List>
                     {
-                        todo.map(i =>
-                            <ListItem key={i.id.toString()} >
+                        todo.map((i, index) =>
+                            <ListItem key={i.id.toString() + (index * 11310).toString()} >
                                 <span>{i.content}</span>
-                                <RenderButtons id={i.id} />
+                                <RenderButtons id={i.id} item={i} />
                             </ListItem>
                         )
                     }

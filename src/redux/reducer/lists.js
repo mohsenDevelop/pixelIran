@@ -1,13 +1,16 @@
 import {
     ADD_TASK,
     DELETE_LIST,
-    MARKED_LIST
+    MARKED_LIST,
+    SELECT_LIST,
+    UPDATE_LIST,
 } from '../types';
 
 const initialState = {
     tasks: [],
     todo: [],
     marked: [],
+    selectedList: {},
 };
 
 export default function (state = initialState, action) {
@@ -34,6 +37,19 @@ export default function (state = initialState, action) {
                 ...state,
                 todo: state.todo.filter(i => i.id !== payload),
                 marked: [...state.marked, ...state.tasks.filter(i => i.id === payload)]
+            };
+        case SELECT_LIST:
+            return {
+                ...state,
+                selectedList: payload
+            };
+
+        case UPDATE_LIST:
+            return {
+                ...state,
+                tasks: state.tasks.map(i => i.id === payload.id ? i = payload : i),
+                todo: state.todo.map(i => i.id === payload.id ? i = payload : i),
+                marked: state.marked.map(i => i.id === payload.id ? i = payload : i),
             }
         default:
             return state;

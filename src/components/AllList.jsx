@@ -3,11 +3,11 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { deletingList } from "../redux/actions/deleteList";
 import { marketingList } from "../redux/actions/marked";
+import { selectedList } from "../redux/actions/update";
 
 
 
-
-export const RenderButtons = ({ id }) => {
+export const RenderButtons = ({ id, item }) => {
     const dispatch = useDispatch();
 
 
@@ -19,10 +19,14 @@ export const RenderButtons = ({ id }) => {
         dispatch(marketingList(id))
     }
 
+    const handleEdit = () => {
+        dispatch(selectedList(item))
+    }
+
     return (
         <div style={{ display: "flex" }}>
             <ButtonCancel onClick={handleDelete}>Delete</ButtonCancel>
-            <ButtonEdit>Edit</ButtonEdit>
+            <ButtonEdit onClick={handleEdit}>Edit</ButtonEdit>
             <ButtonMark onClick={handleMarked}>Mark</ButtonMark>
         </div>
     );
@@ -41,10 +45,10 @@ const AllList = () => {
             !!tasks && tasks.length ? (
                 <List>
                     {
-                        tasks.map(i =>
-                            <ListItem key={i.id.toString()} >
+                        tasks.map((i, index) =>
+                            <ListItem key={i.id.toString() + (index * 11211).toString()} >
                                 <span>{i.content}</span>
-                                <RenderButtons id={i.id} />
+                                <RenderButtons id={i.id} item={i} />
                             </ListItem>
                         )
                     }

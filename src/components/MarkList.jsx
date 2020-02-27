@@ -14,10 +14,10 @@ const MarkList = () => {
             !!marked && marked.length ? (
                 <List>
                     {
-                        marked.map(i =>
-                            <ListItem key={i.id} >
+                        marked.map((i, index) =>
+                            <ListItem key={i.id.toString() + (index * 131).toString()} >
                                 <span>{i.content}</span>
-                                <RenderButtons id={i.id} />
+                                <RenderButtons id={i.id} item={i} />
                             </ListItem>
                         )
                     }
