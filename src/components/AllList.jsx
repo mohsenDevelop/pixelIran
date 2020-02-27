@@ -2,6 +2,8 @@ import React from 'react';
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { deletingList } from "../redux/actions/deleteList";
+import { marketingList } from "../redux/actions/marked";
+
 
 
 
@@ -12,11 +14,16 @@ export const RenderButtons = ({ id }) => {
     const handleDelete = () => {
         dispatch(deletingList(id))
     }
+
+    const handleMarked = () => {
+        dispatch(marketingList(id))
+    }
+
     return (
         <div style={{ display: "flex" }}>
             <ButtonCancel onClick={handleDelete}>Delete</ButtonCancel>
             <ButtonEdit>Edit</ButtonEdit>
-            <ButtonMark>Mark</ButtonMark>
+            <ButtonMark onClick={handleMarked}>Mark</ButtonMark>
         </div>
     );
 }
@@ -180,7 +187,6 @@ export const NotFound = styled('div')`
     align-items: center;
     font-size: 15px;
     width: 50%;
-    margin: 0 auto;
 `;
 
 
