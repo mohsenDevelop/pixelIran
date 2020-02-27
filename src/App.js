@@ -1,19 +1,25 @@
 import React from 'react';
 import './App.css';
 import { Provider } from 'react-redux';
-import store from './redux/store/store';
+import { PersistGate } from 'redux-persist/integration/react'
+import Persistor from './redux/store/store';
 import Lists from "./components/Lists";
 import styled from "styled-components";
 
+export let { store, persistor } = Persistor();
 
 
 
 function App() {
   return (
     <Provider store={store}>
-      <Container>
-        <Lists />
-      </Container>
+      <PersistGate loading={null} persistor={persistor}>
+
+        <Container>
+          <Lists />
+        </Container>
+
+      </PersistGate>
 
     </Provider>
 

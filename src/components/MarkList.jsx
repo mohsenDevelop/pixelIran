@@ -37,7 +37,7 @@ const MarkList = () => {
 
     return (
         <>
-            <Title>Marked List : </Title>
+            <Title>Completed List : </Title>
             <RenderMarkedList />
         </>
     )

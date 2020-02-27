@@ -32,13 +32,13 @@ const Lists = props => {
 
         event.preventDefault();
 
-        if (!!value && value.length && inputID && inputID.current && inputID.current.id.toString().trim() === "textInput") {
+        if (!!value && value.length && inputID && inputID.current && inputID.current.id && inputID.current.id.toString().trim() === "textInput") {
             dispatch(addingTask(value));
             setValue("");
             setChangeBtn(false)
         }
 
-        if (!!value && value.length && inputID && inputID.current && inputID.current.id === selectedList.id) {
+        if (!!value && value.length && selectedList && selectedList.id && inputID && inputID.current && inputID.current.id && inputID.current.id === selectedList.id) {
             dispatch(updateList(selectedList.id, value));
             setValue("");
             setChangeBtn(true)

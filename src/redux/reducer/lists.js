@@ -28,8 +28,10 @@ export default function (state = initialState, action) {
         case DELETE_LIST:
             return {
                 ...state,
-                tasks: state.tasks.filter(i => i.id !== payload),
+                tasks: state.tasks && state.tasks.length > 0 ? state.tasks.filter(i => i.id !== payload) : [],
                 todo: state.todo.filter(i => i.id !== payload),
+                marked: state.marked && state.marked.length > 0 ? state.marked.filter(i => i.id !== payload) : [],
+                selectedList: {},
             };
 
         case MARKED_LIST:
@@ -49,7 +51,7 @@ export default function (state = initialState, action) {
                 ...state,
                 tasks: state.tasks.map(i => i.id === payload.id ? i = payload : i),
                 todo: state.todo.map(i => i.id === payload.id ? i = payload : i),
-                marked: state.marked.map(i => i.id === payload.id ? i = payload : i),
+                marked: state.marked && state.marked.length > 0 ? state.marked.map(i => i.id === payload.id ? i = payload : i) : [],
             }
         default:
             return state;
