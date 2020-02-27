@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import PropTypes from 'prop-types';
+import { addingTask } from "../../redux/actions/addTask";
+import AllList from "./AllList";
 
 const Lists = props => {
 
     const [value, setValue] = useState("");
-    const dispatch = useDispatch;
+    const dispatch = useDispatch();
     // const { patientInformation } = useSelector((state) => state.PatientProfileInformation);
 
     const handleChange = (event) => {
@@ -15,14 +17,20 @@ const Lists = props => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        if (!!value && value.length) {
+            dispatch(addingTask(value));
+        }
     }
-
+    console.log("value", value);
     return (
         <>
             <Form onSubmit={handleSubmit}>
                 <FilterInput id={"textInput"} name={"content"} value={value} onChange={handleChange} placeholder={"typing ..."} />
-                <ButtonAdd type={"submit"} />
+                <ButtonAdd type={"submit"} >Submit</ButtonAdd>
             </Form>
+
+            <AllList />
+
 
         </>
     )
@@ -59,7 +67,7 @@ outline: none;
     
 `;
 
-const ButtonAdd = styled('input')`
+const ButtonAdd = styled('button')`
 border: 1px solid #0069D1;
 width: 120px;
 border-radius: 10px;
@@ -83,4 +91,6 @@ const Form = styled('form')`
    display: flex;
    justify-content: center;
    align-items: center;
+   justify-content: flex-start;
 `;
+
